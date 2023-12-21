@@ -10,33 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 20_231_221_171_426) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_21_174823) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension 'plpgsql'
+  enable_extension "plpgsql"
 
-  create_table 'ticks', force: :cascade do |t|
-    t.string 'name'
-    t.integer 'price'
-    t.text 'description'
-    t.datetime 'time'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.string 'image'
+  create_table "carts", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table 'users', force: :cascade do |t|
-    t.string 'email', default: '', null: false
-    t.string 'encrypted_password', default: '', null: false
-    t.string 'reset_password_token'
-    t.datetime 'reset_password_sent_at'
-    t.datetime 'remember_created_at'
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.integer 'age'
-    t.string 'first_name'
-    t.string 'last_name'
-    t.string 'photo'
-    t.index ['email'], name: 'index_users_on_email', unique: true
-    t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
+  create_table "orderables", force: :cascade do |t|
+    t.bigint "tick_id", null: false
+    t.bigint "cart_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_orderables_on_cart_id"
+    t.index ["tick_id"], name: "index_orderables_on_tick_id"
   end
+
+  create_table "ticks", force: :cascade do |t|
+    t.string "name"
+    t.integer "price"
+    t.text "description"
+    t.datetime "time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "image"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "age"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "photo"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "orderables", "carts"
+  add_foreign_key "orderables", "ticks"
 end

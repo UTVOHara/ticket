@@ -1,0 +1,10 @@
+<%= turbo_frame_tag "cart" do %>
+    <h1>Cart</h1>
+    <%if  @cart.orderables.count > 0 %>
+  
+      <p>total <%= @cart.total%></p>
+    <%else%>
+        <p> Ваша корзина пуста.</p>
+ <%end%>
+ 
+<%end%>

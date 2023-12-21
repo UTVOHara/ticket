@@ -16,8 +16,8 @@
 
    <ul class="nav-links">
                     <li> <%= link_to "Главная", root_path %></li>
-                    <li><%= link_to "Товары" %></li>
-                    <li> <%= link_to "Корзина" %></li>
+                    <li><%= link_to "Билеты", ticks_path  %></li>
+                    <li> <%= link_to "Корзина",   cart_show_path%> </li>
                   \
                     <% if current_user %>
                         <li><%= link_to "Профиль",'/home/profile' %></li>

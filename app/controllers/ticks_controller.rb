@@ -65,6 +65,6 @@ class TicksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def tick_params
-      params.require(:tick).permit(:name, :price, :description, :time)
+      params.require(:tick).permit(:name, :price, :description, :time, :image)
     end
 end

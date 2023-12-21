@@ -19,9 +19,9 @@
         <h3><%= current_user.first_name %></h3>
         <h3><%= current_user.last_name %></h3>
         <% if current_user.photo? %>
-          <%= image_tag current_user.photo.url, style: "width:200px; height:200px;", class: 'img-fluid rounded-circle float-right' if current_user.photo? %>
+          <%= image_tag current_user.photo.url, style: "width:400px; height:500px;" if current_user.photo? %>
         <% else %>
-          <p>ВЫ ЗАБЫЛИ КАРТИНКУ</p>
+          <p>ВЫ ЗАБЫЛИ</p>
         <% end %>
         <p>Your email: <%= current_user.email %></p>
         <p>Your Age: <%= current_user.age %></p>

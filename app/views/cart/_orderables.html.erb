@@ -1,0 +1,25 @@
+<% @cart.orderables.each do |orderable| %>
+   <% tick = orderable.tick %>
+   <div id="<%= "cart-#{tick.id}" %>">
+   <div>
+    
+      <h1><%= tick.name %></h1>
+      <h2><%= tick.description %></h2>
+      <%= tick.time %>
+      <%= tick.price %>
+   </div>
+   
+   <div >
+      <%= form_with(url: cart_add_path) do |f| %>
+         <%= f.hidden_field :id, value: tick.id%>
+         <%= f.number_field :quantity, value: orderable.quantity, min: 0 %>
+         <%=f.submit "добавить"%> 
+      <%end%>
+   </div>
+      <%= form_with(url: cart_remove_path)do |f|%>
+         <%= f.hidden_field :id, value: orderable.id%>
+         <button id="b"><%=f.submit "X"%> </button>
+      <%end%>
+   <%=orderable.total  %>
+   
+<%end%>
