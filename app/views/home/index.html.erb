@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Моя страница</title>
+    <style>
+      .center-text {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <p style="color: green"><%= notice %></p>
+     <h1> Домашняя страница</h1>
+  </body>
+
+   <ul class="nav-links">
+                    <li> <%= link_to "Главная", root_path %></li>
+                    <li><%= link_to "Товары" %></li>
+                    <li> <%= link_to "Корзина" %></li>
+                  \
+                    <% if current_user %>
+                        <li><%= link_to "Профиль",'/users/profile' %></li>
+                        <li><%= link_to "Выход", destroy_user_session_path, 'data-turbo-method': :delete %>
+                    <% else %>
+                        </li><%= link_to "Вход", new_user_session_path %></li>
+                        </li> <%= link_to "Регистрация", new_user_registration_path %></li>
+                    <% end %>
+                </ul>
+</html>
