@@ -10,6 +10,7 @@ gem 'sprockets-rails'
 
 gem 'carrierwave'
 gem 'devise'
+gem 'pundit'
 
 gem 'stimulus-rails'
 gem 'turbo-rails'

@@ -1,5 +1,6 @@
 class TicksController < ApplicationController
-  before_action :set_tick, only: %i[ show edit update destroy ]
+  before_action :set_tick, only: %i[show edit update destroy]
+  before_action :authenticate_user!, except: %i[index show]
 
   # GET /ticks or /ticks.json
   def index
@@ -7,25 +8,26 @@ class TicksController < ApplicationController
   end
 
   # GET /ticks/1 or /ticks/1.json
-  def show
-  end
+  def show; end
 
   # GET /ticks/new
   def new
-    @tick = Tick.new
+     @tick = Tick.new
+     authorize @tick
   end
 
   # GET /ticks/1/edit
   def edit
+    authorize @tick
   end
 
   # POST /ticks or /ticks.json
   def create
     @tick = Tick.new(tick_params)
-
+    authorize @tick
     respond_to do |format|
       if @tick.save
-        format.html { redirect_to tick_url(@tick), notice: "Tick was successfully created." }
+        format.html { redirect_to tick_url(@tick), notice: 'Tick was successfully created.' }
         format.json { render :show, status: :created, location: @tick }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -36,9 +38,10 @@ class TicksController < ApplicationController
 
   # PATCH/PUT /ticks/1 or /ticks/1.json
   def update
+    authorize @tick
     respond_to do |format|
       if @tick.update(tick_params)
-        format.html { redirect_to tick_url(@tick), notice: "Tick was successfully updated." }
+        format.html { redirect_to tick_url(@tick), notice: 'Tick was successfully updated.' }
         format.json { render :show, status: :ok, location: @tick }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -49,22 +52,24 @@ class TicksController < ApplicationController
 
   # DELETE /ticks/1 or /ticks/1.json
   def destroy
+    authorize @tick
     @tick.destroy
 
     respond_to do |format|
-      format.html { redirect_to ticks_url, notice: "Tick was successfully destroyed." }
+      format.html { redirect_to ticks_url, notice: 'Tick was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tick
-      @tick = Tick.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def tick_params
-      params.require(:tick).permit(:name, :price, :description, :time, :image)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_tick
+    @tick = Tick.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def tick_params
+    params.require(:tick).permit(:name, :price, :description, :time, :image)
+  end
 end

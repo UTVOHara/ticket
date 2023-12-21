@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
   before_action :set_render_cart
   before_action :initialize_cart
   before_action :configure_permitted_parameters, if: :devise_controller?
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   def set_render_cart
     @render_cart = true

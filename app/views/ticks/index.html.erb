@@ -10,5 +10,7 @@
     </p>
   <% end %>
 </div>
-
+<%if current_user&.admin?%>
 <%= link_to "New tick", new_tick_path %>
+
+ <% end %>
