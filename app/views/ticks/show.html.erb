@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @tick %>
+
+<div>
+  <%= link_to "Edit this tick", edit_tick_path(@tick) %> |
+  <%= link_to "Back to ticks", ticks_path %>
+
+  <%= button_to "Destroy this tick", @tick, method: :delete %>
+</div>

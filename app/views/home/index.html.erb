@@ -20,7 +20,7 @@
                     <li> <%= link_to "Корзина" %></li>
                   \
                     <% if current_user %>
-                        <li><%= link_to "Профиль",'/users/profile' %></li>
+                        <li><%= link_to "Профиль",'/home/profile' %></li>
                         <li><%= link_to "Выход", destroy_user_session_path, 'data-turbo-method': :delete %>
                     <% else %>
                         </li><%= link_to "Вход", new_user_session_path %></li>
